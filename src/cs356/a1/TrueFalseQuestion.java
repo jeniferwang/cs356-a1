@@ -1,5 +1,7 @@
 package cs356.a1;
 
+import java.util.Arrays;
+
 public class TrueFalseQuestion implements Question {
 
 	private String question;
@@ -8,38 +10,32 @@ public class TrueFalseQuestion implements Question {
 	
 	@Override
 	public void setQuestion(String question) {
-		// TODO Auto-generated method stub
-
+		this.question = question;
 	}
 
 	@Override
 	public String getQuestion() {
-		// TODO Auto-generated method stub
-		return null;
+		return question;
 	}
 
 	@Override
 	public void setOptions(String[] options) {
-		// TODO Auto-generated method stub
-
+		this.options = Arrays.copyOf(options, options.length);
 	}
 
 	@Override
 	public String[] getOptions() {
-		// TODO Auto-generated method stub
-		return null;
+		return options;
 	}
 
 	@Override
 	public void setAnswers(String qAnswer) {
-		// TODO Auto-generated method stub
-
+		this.answers = qAnswer;
 	}
 
 	@Override
 	public String getAnswers() {
-		// TODO Auto-generated method stub
-		return null;
+		return answers;
 	}
 
 }

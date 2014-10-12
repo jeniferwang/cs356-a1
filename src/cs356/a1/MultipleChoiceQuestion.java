@@ -7,7 +7,7 @@ public class MultipleChoiceQuestion implements Question {
 
 	private String question;
 	private String[] options;
-	private String answers;
+	private String answers = "";
 	
 	@Override
 	public void setQuestion(String question) {
@@ -34,7 +34,10 @@ public class MultipleChoiceQuestion implements Question {
 
 	@Override
 	public void setAnswers(String qAnswer) {
-		this.answers = qAnswer;
+		char[] ch = qAnswer.toCharArray();
+		for (int i = 0; i < ch.length; i++) {
+			this.answers += ch[i] + " ";
+		}
 
 	}
 

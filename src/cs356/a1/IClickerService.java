@@ -1,9 +1,9 @@
 package cs356.a1;
 
-import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Arrays;
+import java.util.Map;
 
 
 public class IClickerService {
@@ -26,10 +26,7 @@ public class IClickerService {
 		}
 		printQuestion();
 		
-		System.out.println("Collecting answers...");
-		
-		//System.out.println("Solution");
-		
+		System.out.println("\nCollecting answers...\n");
 	}
 	
 	public void printQuestion() {
@@ -39,9 +36,9 @@ public class IClickerService {
 		}
 	}
 	
-	public void collectSubmissions(Hashtable table) {
-		Collection c = table.values();
-		Iterator itr = c.iterator();
+	public void collectSubmissions(Hashtable<Integer, String> table) {
+		Iterator<Map.Entry<Integer,String>>  itr;
+		Map.Entry<Integer,String> entry;
 		
 		String[] options = null;
 		int[] total;
@@ -57,10 +54,14 @@ public class IClickerService {
 		
 		total = new int[options.length];
 		
-		while(itr.hasNext()) {
-			String values = (String) itr.next();
-			System.out.println(values);
-			String[] valuesSeparate = values.split("");
+		itr = table.entrySet().iterator();
+		System.out.println("\nStudent input summary:");
+		while (itr.hasNext()) {
+		    entry = itr.next();
+		    String id = entry.getKey().toString();
+		    String values = entry.getValue().toString();
+		    System.out.println("Student ID: " + id + "    " + "Student answers: " + values);
+		    String[] valuesSeparate = values.split("");
 			for (int i = 0; i < valuesSeparate.length; i++) {
 				for (int j = 0; j < options.length; j++) {
 					if (valuesSeparate[i].equals(options[j])) {
@@ -71,6 +72,7 @@ public class IClickerService {
 		}
 		
 		printResults(options, total);
+		printAnswers();
 	}
 	
 	public void printResults(String[] options, int[] total) {
@@ -81,7 +83,13 @@ public class IClickerService {
 			totalCount = totalCount + total[i];
 		}
 		
-		System.out.println("Total student answers:" + totalCount);
+		System.out.println("\nTotal student answers:" + totalCount);
+	}
+	
+	public void printAnswers() {
+		if (questionType == 0) {
+			System.out.println("The answer is: " + q1.getAnswers());
+		}
 	}
 	
 }
