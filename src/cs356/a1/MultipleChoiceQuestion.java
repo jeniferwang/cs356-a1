@@ -34,14 +34,13 @@ public class MultipleChoiceQuestion implements Question {
 
 	@Override
 	public void setAnswers(String qAnswer) {
-		// TODO Auto-generated method stub
+		this.answers = qAnswer;
 
 	}
 
 	@Override
 	public String getAnswers() {
-		// TODO Auto-generated method stub
-		return null;
+		return answers;
 	}
 
 }

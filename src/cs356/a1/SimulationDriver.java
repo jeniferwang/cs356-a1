@@ -1,8 +1,6 @@
 package cs356.a1;
 
-import java.util.Collection;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.Random;
 
 
@@ -11,6 +9,7 @@ public class SimulationDriver {
 	private static Random random;
 	private static int questionType;
 	private static Hashtable<Integer, String> table;
+	private static IClickerService start;
 	
 	public static void main(String[] args) {
 		startiClickerServices();
@@ -19,7 +18,7 @@ public class SimulationDriver {
 	
 	// Start iClickerServices and initialize question and answer
 	public static void startiClickerServices() {
-		IClickerService start = new IClickerService();
+		start = new IClickerService();
 		
 		// 0 for Multiple Choice, 1 for T/F
 		int[] type = {0, 1};
@@ -81,11 +80,7 @@ public class SimulationDriver {
 			
 			System.out.println("Hash table size = " + table.size());
 			
-			Collection c = table.values();
-			Iterator itr = c.iterator();
-			while(itr.hasNext()) {
-				System.out.println(itr.next());
-			}
+			start.collectSubmissions(table);
 			
 		// Generate for TrueFalse Question
 		} else if (questionType == 1) {
