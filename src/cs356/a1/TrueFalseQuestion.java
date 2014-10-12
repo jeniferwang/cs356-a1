@@ -6,7 +6,7 @@ public class TrueFalseQuestion implements Question {
 
 	private String question;
 	private String[] options;
-	private String answers;
+	private String answers = "";
 	
 	@Override
 	public void setQuestion(String question) {

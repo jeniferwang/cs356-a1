@@ -22,9 +22,6 @@ public class MultipleChoiceQuestion implements Question {
 	@Override
 	public void setOptions(String[] options) {
 		this.options = Arrays.copyOf(options, options.length);
-		/*for (String element : this.options) {
-			System.out.println(element);
-		}*/
 	}
 
 	@Override

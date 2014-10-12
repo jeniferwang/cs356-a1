@@ -5,19 +5,19 @@ public class Student {
 	private int studentID;
 	private String answers;
 	
-	public void setStudentID(int studentID) {
+	protected void setStudentID(int studentID) {
 		this.studentID = studentID;
 	}
 	
-	public int getStudentID() {
+	protected int getStudentID() {
 		return studentID;
 	}
 	
-	public void setAnswers(String answers) {
+	protected void setAnswers(String answers) {
 		this.answers = answers;
 	}
 	
-	public String getAnswers() {
+	protected String getAnswers() {
 		return answers;
 	}
 }

@@ -8,11 +8,11 @@ import java.util.Map;
 
 public class IClickerService {
 
-	MultipleChoiceQuestion q1;
-	TrueFalseQuestion q2;
+	private MultipleChoiceQuestion q1;
+	private TrueFalseQuestion q2;
 	private int questionType;
 	
-	public void serviceStart(int t, String q, String[] o, String a) {
+	protected void serviceStart(int t, String q, String[] o, String a) {
 		questionType = t;
 		if (questionType == 0) {
 			q1 = new MultipleChoiceQuestion();
@@ -21,23 +21,34 @@ public class IClickerService {
 			q1.setAnswers(a);
 		} else if (questionType == 1) {
 			q2 = new TrueFalseQuestion();
+			q2.setQuestion(q);
+			q2.setOptions(Arrays.copyOf(o, o.length));
+			q2.setAnswers(a);
 		} else {
 			System.out.println("No such question type");
 		}
 		printQuestion();
 		
-		System.out.println("\nCollecting answers...\n");
 	}
 	
-	public void printQuestion() {
-		System.out.println(q1.getQuestion());
-		for (String element : q1.getOptions()) {
-			System.out.println(element);
+	protected void printQuestion() {
+		if (questionType == 0) {
+			System.out.println(q1.getQuestion());
+			for (String element : q1.getOptions()) {
+				System.out.println(element);
+			}
+		} else if (questionType == 1) {
+			System.out.println(q2.getQuestion());
+			for (String element : q2.getOptions()) {
+				System.out.println(element);
+			}
+		} else {
+			System.out.println("No such question type");
 		}
 	}
 	
-	public void collectSubmissions(Hashtable<Integer, String> table) {
-		Iterator<Map.Entry<Integer,String>>  itr;
+	protected void collectSubmissions(Hashtable<Integer, String> table) {
+		Iterator<Map.Entry<Integer,String>> itr;
 		Map.Entry<Integer,String> entry;
 		
 		String[] options = null;
@@ -75,7 +86,7 @@ public class IClickerService {
 		printAnswers();
 	}
 	
-	public void printResults(String[] options, int[] total) {
+	protected void printResults(String[] options, int[] total) {
 		int totalCount = 0;
 		System.out.println("\n Results:");
 		for (int i = 0; i < options.length; i++) {
@@ -86,9 +97,13 @@ public class IClickerService {
 		System.out.println("\nTotal student answers:" + totalCount);
 	}
 	
-	public void printAnswers() {
+	protected void printAnswers() {
 		if (questionType == 0) {
 			System.out.println("The answer is: " + q1.getAnswers());
+		} else if (questionType == 1) {
+			System.out.println("The answer is: " + q2.getAnswers());
+		} else {
+			System.out.println("No such answer");
 		}
 	}
 	
