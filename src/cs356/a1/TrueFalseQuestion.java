@@ -2,6 +2,10 @@ package cs356.a1;
 
 public class TrueFalseQuestion implements Question {
 
+	private String question;
+	private String[] options;
+	private String answers;
+	
 	@Override
 	public void setQuestion(String question) {
 		// TODO Auto-generated method stub

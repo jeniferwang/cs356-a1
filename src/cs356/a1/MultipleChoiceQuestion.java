@@ -1,29 +1,35 @@
 package cs356.a1;
 
+import java.util.Arrays;
+
+
 public class MultipleChoiceQuestion implements Question {
 
+	private String question;
+	private String[] options;
+	private String answers;
+	
 	@Override
 	public void setQuestion(String question) {
-		// TODO Auto-generated method stub
-
+		this.question = question;
 	}
 
 	@Override
 	public String getQuestion() {
-		// TODO Auto-generated method stub
-		return null;
+		return question;
 	}
-
+	
 	@Override
 	public void setOptions(String[] options) {
-		// TODO Auto-generated method stub
-
+		this.options = Arrays.copyOf(options, options.length);
+		/*for (String element : this.options) {
+			System.out.println(element);
+		}*/
 	}
 
 	@Override
 	public String[] getOptions() {
-		// TODO Auto-generated method stub
-		return null;
+		return options;
 	}
 
 	@Override
