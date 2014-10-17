@@ -1,6 +1,8 @@
 package cs356.a1;
 
-public interface Question {
+	/* Interface for the different types of questions with question properties
+ 	   of: the 'question', student 'options', and student qAnswers */
+interface Question {
 
 	public void setQuestion(String question);
 	

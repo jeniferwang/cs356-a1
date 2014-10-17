@@ -2,8 +2,8 @@ package cs356.a1;
 
 import java.util.Arrays;
 
-
-public class MultipleChoiceQuestion implements Question {
+// Implementation of Multiple Choice question module
+class MultipleChoiceQuestion implements Question {
 
 	private String question;
 	private String[] options;
@@ -29,6 +29,7 @@ public class MultipleChoiceQuestion implements Question {
 		return options;
 	}
 
+	// Sets answers to support multiple answers
 	@Override
 	public void setAnswers(String qAnswer) {
 		char[] ch = qAnswer.toCharArray();

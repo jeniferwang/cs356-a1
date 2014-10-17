@@ -1,8 +1,15 @@
+/* CS356 
+ * Assignment #1 : iClickerService
+   Jenifer Wang */
+
 package cs356.a1;
 
 import java.util.Hashtable;
 import java.util.Random;
 
+/* Driver class to execute the iClicker Service. 3 Cases that were tested: 
+ * one MC with one answer, one MC with multiple answers, and one T/F. Remove 
+ * override comments to print out override procedure */
 
 public class SimulationDriver {
 	
@@ -16,13 +23,14 @@ public class SimulationDriver {
 		startiClickerServices();
 	}
 	
-	// Start iClickerServices and initialize question and answer
+	// Start iClickerServices and initialize questions and answers
 	private static void startiClickerServices() {
 		start = new IClickerService();
 		
 		// 0 for Multiple Choice, 1 for T/F
 		int[] type = {0, 1};
 		
+		// Case 1: Multiple Choice with one answer
 		System.out.println("Question #1: Multiple Choice Question");
 		questionType = type[0];
 		String q1 = "What is 1 + 1?";
@@ -34,33 +42,48 @@ public class SimulationDriver {
 		
 		System.out.println();
 		
-		System.out.println("Question #2: True or False Question");
-		questionType = type[1];
-		String q2 = "Penguins can fly. True or False";
-		String[] o2 = {"1. True" , "2. False"};  
-		String a2 = "2";
-		
+		// Case 2: Multiple Choice with more than one answer
+		System.out.println("Question #2: Multiple Choice Question");
+		questionType = type[0];
+		String q2 = "Which ones are programming languages?";
+		String[] o2 = {"A. Java", "B. Cookies", "C. C++", "D. Perl"};  
+		String a2 = "ACD";
+	
 		start.serviceStart(questionType, q2, o2, a2);
+		generateStudents();
+		
+		System.out.println();
+		
+		// Case 3: True/False question
+		System.out.println("Question #3: True or False Question");
+		questionType = type[1];
+		String q3 = "Penguins can fly. True or False";
+		String[] o3 = {"1. True" , "2. False"};  
+		String a3 = "2";
+		
+		start.serviceStart(questionType, q3, o3, a3);
 		generateStudents();
 	}
 	
-	// Generate a random total number of students
+	// Generates a random total number of student inputs
 	private static void generateStudents() {
 		random = new Random();
-		int totalStudents = 5; // random.nextInt(26) + 5;
+		int totalStudents = random.nextInt(26) + 5;
 		generateStudentAnswers(totalStudents);
 	}
 	
-	// Generate student IDs and answers
-	private static void generateStudentAnswers(int totalStudents){
+	// Generates student IDs and answers and stores data to hashtable
+	private static void generateStudentAnswers(int totalStudents) {
 		table = new Hashtable<Integer, String>();
-		
 		
 		for (int i = 0; i < totalStudents; i++) {
 			int studentID = random.nextInt(500) + 1;
 			char[] studentSingleAnswer;
 			String choices = "";
 			int studentChoices = 0;
+			
+			/* Let studentChoices be 1-4 for Multiple Choice (enable multiple answers) and 
+			 * choices be letters and let studentChoices be 1 for T/F and choices be numbers */		
 			if (questionType == 0) {
 				choices = "ABCD";
 				studentChoices = random.nextInt(4) + 1;
@@ -68,33 +91,37 @@ public class SimulationDriver {
 				choices = "12";
 				studentChoices = 1;
 			} else {
-				System.out.println("No such question type");
+				throw new IllegalArgumentException("No such question type");
 			}
 			studentSingleAnswer = new char[studentChoices];
+			
+			// Generate students' answers
 			for (int k = 0; k < studentSingleAnswer.length; k++) {
-				
 				char temp = choices.charAt(random.nextInt(choices.length()));
-				
 				while ((String.valueOf(studentSingleAnswer).contains(String.valueOf(temp)))) {
 					temp = choices.charAt(random.nextInt(choices.length()));
 				}
-				
 				studentSingleAnswer[k] = temp;
 			}
 			
 			String studentAnswers = new String(studentSingleAnswer);
+			
+			// If studentID already exists, override the old one
 			if (table.containsKey(studentID)) {
+				//System.out.println("Student ID: " + studentID + "'s answer has changed to " + studentAnswers);
 				table.remove(studentID);
+			} else {
+				//System.out.println("Student ID: " + studentID + " has selected " + studentAnswers);
 			}
 			
 			table.put(studentID, studentAnswers);
 			
-			
 		}
 		
-		System.out.println("Hash table size = " + table.size());
+		// Prints total # of students
+		System.out.println("\nStudent size = " + table.size());
 		
-		// Sent student submissions to iClicker Service
+		// Send student submissions to iClicker Service
 		start.collectSubmissions(table);
 		
 	}

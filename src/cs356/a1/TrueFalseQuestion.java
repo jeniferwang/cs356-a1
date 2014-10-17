@@ -2,7 +2,8 @@ package cs356.a1;
 
 import java.util.Arrays;
 
-public class TrueFalseQuestion implements Question {
+// Implementation of the T/F Question module
+class TrueFalseQuestion implements Question {
 
 	private String question;
 	private String[] options;
