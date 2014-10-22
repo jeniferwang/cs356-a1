@@ -6,6 +6,11 @@ public class Student {
 	private int studentID;
 	private String answers;
 	
+	public Student(int studentID, String studentAnswers) {
+		this.studentID = studentID;
+		this.answers = studentAnswers;
+	}
+
 	void setStudentID(int studentID) {
 		this.studentID = studentID;
 	}

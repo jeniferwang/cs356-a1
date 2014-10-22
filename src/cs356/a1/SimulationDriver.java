@@ -15,7 +15,7 @@ public class SimulationDriver {
 	
 	private static Random random;
 	private static int questionType;
-	private static Hashtable<Integer, String> table;
+	private static Hashtable<Integer, Student> table;
 	private static IClickerService start;
 	
 	// Driver main method to start iClicker Service
@@ -68,15 +68,15 @@ public class SimulationDriver {
 	// Generates a random total number of student inputs
 	private static void generateStudents() {
 		random = new Random();
-		int totalStudents = random.nextInt(26) + 5;
-		generateStudentAnswers(totalStudents);
+		int totalStudentInputs = random.nextInt(26) + 5;
+		generateStudentAnswers(totalStudentInputs);
 	}
 	
 	// Generates student IDs and answers and stores data to hashtable
-	private static void generateStudentAnswers(int totalStudents) {
-		table = new Hashtable<Integer, String>();
+	private static void generateStudentAnswers(int totalStudentInputs) {
+		table = new Hashtable<Integer, Student>();
 		
-		for (int i = 0; i < totalStudents; i++) {
+		for (int i = 0; i <= totalStudentInputs; i++) {
 			int studentID = random.nextInt(500) + 1;
 			char[] studentSingleAnswer;
 			String choices = "";
@@ -114,7 +114,7 @@ public class SimulationDriver {
 				//System.out.println("Student ID: " + studentID + " has selected " + studentAnswers);
 			}
 			
-			table.put(studentID, studentAnswers);
+			table.put(studentID, new Student(studentID, studentAnswers));
 			
 		}
 		

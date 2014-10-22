@@ -4,6 +4,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Map.Entry;
 
 // iClickerService class to perform iClicker Services
 public class IClickerService {
@@ -51,9 +52,9 @@ public class IClickerService {
 	
 	/* Gather the data stored in Hashtable and prints out the students' answers within Hashtable
 	   then calls on printResults() and printAnswers() */
-	void collectSubmissions(Hashtable<Integer, String> table) {
-		Iterator<Map.Entry<Integer,String>> itr;
-		Map.Entry<Integer,String> entry;
+	void collectSubmissions(Hashtable<Integer, Student> table) {
+		Iterator<Entry<Integer, Student>> itr;
+		Entry<Integer, Student> entry;
 		
 		String[] options = null;
 		int[] total;
@@ -75,8 +76,8 @@ public class IClickerService {
 		System.out.println("\nStudent input summary:");
 		while (itr.hasNext()) {
 		    entry = itr.next();
-		    String id = entry.getKey().toString();
-		    String values = entry.getValue().toString();
+		    int id = entry.getValue().getStudentID();
+		    String values = entry.getValue().getAnswers();
 		    System.out.println("Student ID: " + id + "    " + "Student answers: " + values);
 		    String[] valuesSeparate = values.split("");
 			for (int i = 0; i < valuesSeparate.length; i++) {
